@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>அலகு 2: அதிகாரத்தைப் பன்முகப்படுத்தலும் பகிர்ந்தளித்தலும்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&display=swap">
+<style>
+:root{color-scheme:dark;--ink:#FFF4E0;--gold:#FCA311}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden}
+body{font-family:'Noto Sans Tamil',system-ui,sans-serif;color:var(--ink);background:linear-gradient(135deg,#2B1B4B,#0B3C49);line-height:1.4}
+#cv{position:absolute;left:50%;top:50%;transform-origin:0 0;overflow:hidden}
+#app{width:100%;height:100%;display:flex;flex-direction:column}
+header{padding:22px 40px 4px;text-align:center}
+.unit{font-size:26px;color:var(--gold);font-weight:700}
+h1{font-size:50px;margin:0;line-height:1.25;animation:rise .6s both}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}}
+@keyframes pop{from{opacity:0;transform:scale(.7)}}
+@keyframes fade{from{opacity:0}}
+@keyframes float{50%{transform:translateY(-8px)}}
+#stage{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:6px 50px}
+.grid{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:center;max-width:1820px}
+.tile{--c:#FCA311;font:inherit;color:var(--ink);cursor:pointer;width:440px;min-height:150px;padding:16px 22px;border-radius:26px;border:3px solid var(--c);background:rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-size:32px;font-weight:700;box-shadow:0 0 28px -8px var(--c);animation:pop .5s both;animation-delay:var(--d);transition:transform .2s,background .2s}
+.tile .ic{font-size:52px;line-height:1.1;animation:float 3s ease-in-out infinite}
+.tile:hover{transform:translateY(-6px) scale(1.04);background:rgba(255,255,255,.16)}
+.tile.seen{background:color-mix(in srgb,var(--c) 22%,transparent)}
+.tile.seen::after{content:"✔";font-size:26px;color:var(--c)}
+.big{width:520px;min-height:240px;font-size:38px}.big .ic{font-size:76px}
+.xm{width:262px;min-height:210px;font-size:30px}.br{flex-basis:100%;height:0}
+tile small,.tile small{display:block;font-size:22px;font-weight:400;line-height:1.3;opacity:.92}
+.md{width:385px;min-height:210px;font-size:32px}
+.sm{width:272px;min-height:170px;font-size:28px}.sm .ic{font-size:44px}
+.sep{font-size:58px;font-weight:700;color:var(--gold);animation:pop .5s both;animation-delay:var(--d)}
+table{border-collapse:separate;border-spacing:0 10px;width:1780px;font-size:28px}
+th{background:var(--gold);color:#2B1B4B;padding:12px 20px;text-align:left;font-size:30px}
+th:first-child{border-radius:16px 0 0 16px}th:last-child{border-radius:0 16px 16px 0}
+td{background:rgba(255,255,255,.09);padding:12px 20px;vertical-align:middle}
+td:first-child{border-radius:16px 0 0 16px;font-weight:700;color:#2EC4B6}td:last-child{border-radius:0 16px 16px 0}
+tbody tr{cursor:pointer;animation:fade .5s both;animation-delay:var(--d)}
+tbody tr:hover td{background:rgba(255,255,255,.2)}
+tbody tr.seen td:first-child::before{content:"✔ ";color:var(--gold)}
+#hint{text-align:center;font-size:26px;opacity:.85}
+nav{display:flex;align-items:center;justify-content:center;gap:22px;padding:8px 20px 18px}
+nav button{font:inherit;font-size:30px;font-weight:700;border:0;border-radius:999px;padding:10px 44px;background:var(--gold);color:#2B1B4B;cursor:pointer}
+nav button:disabled{opacity:.35;cursor:default}
+#dots{display:flex;gap:12px;align-items:center}
+#dots i{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer}
+#dots i.on{background:var(--gold);transform:scale(1.45)}
+#pop{position:absolute;inset:0;background:rgba(5,10,25,.76);display:none;align-items:center;justify-content:center;padding:24px;z-index:5}
+#pop.show{display:flex}
+#card{--c:#FCA311;position:relative;width:1250px;max-width:100%;max-height:100%;overflow:auto;background:#241A45;border:5px solid var(--c);border-radius:36px;padding:34px 46px 30px;text-align:center;animation:pop .35s both;box-shadow:0 0 80px -10px var(--c)}
+#card .big-ic{font-size:84px;line-height:1.1}
+#card h2{margin:4px 0 12px;font-size:50px;color:var(--c);line-height:1.3}
+#card ul{list-style:none;margin:0;padding:0;text-align:left;font-size:36px}
+#card li{padding:10px 22px;margin:9px 0;border-radius:18px;background:rgba(255,255,255,.09);animation:rise .4s both}
+#card.sm ul{font-size:30px}#card.sm li{padding:7px 20px;margin:7px 0}
+#card.xs ul{font-size:26px}#card.xs li{padding:5px 18px;margin:5px 0}
+#x{position:absolute;top:14px;right:22px;font:inherit;font-size:44px;border:0;background:none;color:var(--ink);cursor:pointer}
+</style>
+</head>
+<body>
+<div id="cv">
+<div id="app">
+<header><div class="unit">🏛️ அலகு 2 · அதிகாரத்தைப் பன்முகப்படுத்தலும் பகிர்ந்தளித்தலும்</div><h1 id="t"></h1></header>
+<div id="stage"><div class="grid" id="g"></div></div>
+<div id="hint"></div>
+<nav><button id="pv" aria-label="முந்தையது">◀</button><div id="dots"></div><button id="nx" aria-label="அடுத்தது">▶</button></nav>
+</div>
+<div id="pop"><div id="card"><button id="x" aria-label="மூடு">✕</button><div class="big-ic" id="ci"></div><h2 id="ch"></h2><ul id="cl"></ul></div></div>
+</div>
+<script>
+var COL=['#FCA311','#2EC4B6','#FF6B8B','#9D8DFF','#4ADE80','#FF9F5A'];
+var S=[
+{t:'1. அறிமுகம் மற்றும் அதிகாரத்தின் வரைவிலக்கணம்',cls:'md',sep:{1:'➜'},br:[4],it:[
+['⚡','அதிகாரம் (Power)',['அரசின் நிர்வாக நடவடிக்கைகளை மேற்கொள்வதற்காக அவ்வரசுக்குள்ள ஆற்றலாகும்.'],'அரசுக்குள்ள ஆற்றல்'],
+['👑','இறையாண்மை (Sovereignty)',['அதிகாரத்தின் இறுதி உரிமை பொதுமக்களுக்கே உரியது; இது “இறையாண்மை” எனப்படும்.','இறையாண்மையில் 3 பிரதான விடயங்கள் உள்ளடங்கும்: A. ஆட்சி அதிகாரம் · B. வாக்குரிமை · C. அடிப்படை உரிமைகள்'],'இறுதி உரிமை மக்களுக்கே'],
+['🏛️','A. ஆட்சி அதிகாரம்',['இறையாண்மையின் 3 பிரதான விடயங்களில் ஒன்று','அதிகாரத்தின் இறுதி உரிமை மக்களுக்கே உரியது'],'','xm'],
+['🗳️','B. வாக்குரிமை',['இறையாண்மையின் 3 பிரதான விடயங்களில் ஒன்று','அதிகாரத்தின் இறுதி உரிமை மக்களுக்கே உரியது'],'','xm'],
+['🕊️','C. அடிப்படை உரிமைகள்',['இறையாண்மையின் 3 பிரதான விடயங்களில் ஒன்று','அதிகாரத்தின் இறுதி உரிமை மக்களுக்கே உரியது'],'','xm'],
+['⚖️','அரசியல் அறிவியல்',['“அதிகாரத்தை நடைமுறைப்படுத்துவோர் தாம் விரும்பியவாறு அதிகாரத்திற்குட்பட்டோரை ஆட்சி செய்யும் ஆற்றலும், தமது விருப்பத்திற்கு இணங்காதபோது வற்புறுத்துவதன் மூலம் அடிபணிய வைக்கும் ஆற்றலுமாகும்.”'],'ஆளும் ஆற்றல் + அடிபணிய வைக்கும் ஆற்றல்'],
+['💰','பொருளியல் நிபுணர்கள்',['“பொருளாதார முறையில் அதிகாரம் பெற்ற குழுவினரால் ஏனையோரை வழிநடத்துவதற்கு மேற்கொள்ளப்படும் முயற்சியே அதிகாரமாகும்.”'],'வழிநடத்தும் முயற்சி'],
+['🤝','சமூகவியல்',['“ஒரு சமூகத்தில் வாழும் பிரஜைகள் மற்றும் சமூக இயக்கங்கள் என்பவற்றுக்கு மேலாகச் செயற்படுவதற்கு சமூகத்திற்குள்ள ஆற்றலே அதிகாரமாகும்.”'],'சமூகத்தின் ஆற்றல்']]},
+{t:'2. அதிகாரத்தைப் பன்முகப்படுத்தலும் அதிகாரப் பகிர்வும்',cls:'md',sep:{1:'VS'},br:[3],it:[
+['🔀','பன்முகப்படுத்தல்: பொருள்',['மத்திய அரசிடமுள்ள நிர்வாக அதிகாரங்களுள் சிலவற்றைப் பிராந்திய நிர்வாக அலகுகளிடம் அல்லது உள்ளூராட்சி மன்றங்களிடம் கையளித்தலாகும்.'],'Administrative Decentralization / Deconcentration'],
+['📋','பன்முகப்படுத்தல்: இயல்புகள்',['மத்திய அரசின் சட்டவாக்கத்துறையினால் நிறைவேற்றப்பட்ட சட்டம்/மசோதா ஒன்றின் மூலம் செயற்படுத்தப்படும்.','மத்திய அரசுக்குத் தேவையான சந்தர்ப்பத்தில் அதிகாரங்களை மீண்டும் திரும்பப் பெற்றுக்கொள்ள முடியும். (எ.கா: இலங்கையின் உள்ளூராட்சி மன்றங்கள்)'],'சட்டத்தால் · மீளப் பெறலாம்'],
+['🧩','அதிகாரப் பகிர்வு: பொருள்',['மத்திய அரசின் சட்டவாக்கம், நிறைவேற்று, நீதி ஆகிய முத்துறை அதிகாரங்களும் அரசியலமைப்பின் மூலம் பிராந்திய ஆட்சி அலகுகளிடம் (மாநிலங்கள்/மாகாணங்கள்) கையளித்தலாகும்.'],'Devolution of Power'],
+['🔒','அதிகாரப் பகிர்வு: இயல்புகள்',['அதிகாரப் பகிர்வு அரசியலமைப்பின் மூலம் மட்டுமே மேற்கொள்ளப்படும்.','பகிர்ந்தளிக்கப்பட்ட அதிகாரங்களை மாற்றியமைக்க அல்லது திருத்த, அரசியலமைப்பைச் சீர்திருத்த வேண்டும்.'],'அரசியலமைப்பால் மட்டுமே'],
+['🪜','இலங்கையின் நிர்வாக மட்டங்கள்',['<span>🏛️ <b>தேசிய மட்டம்</b> ➜ அமைச்சின் செயலாளர்</span>','<span style="margin-left:60px">🏙️ <b>மாவட்ட மட்டம்</b> ➜ மாவட்டச் செயலாளர்</span>','<span style="margin-left:120px">🏘️ <b>பிரதேச மட்டம்</b> ➜ பிரதேசச் செயலாளர்</span>','<span style="margin-left:180px">🏡 <b>கிராம உத்தியோகத்தர் பிரிவு</b> ➜ கிராம உத்தியோகத்தர்</span>'],'தேசியம் முதல் கிராமம் வரை','',1],
+['🏭','அதிகார சபைகளிடம் பன்முகப்படுத்தல்',['அரச முயற்சிகளை மேற்கொள்வதற்காகத் திணைக்களங்கள், கூட்டுத்தாபனங்கள், சபைகள், அதிகாரசபைகளுக்கு அதிகாரங்கள் வழங்கப்பட்டுள்ளன.','உதாரணம்: இலங்கை பெட்ரோலியக் கூட்டுத்தாபனம், இலங்கை துறைமுக அதிகார சபை'],'அரசு முயற்சியாண்மை']]},
+{t:'ஒப்பீடு 1: பன்முகப்படுத்தல் × அதிகாரப் பகிர்வு',tb:1,h:['அம்சம்','பன்முகப்படுத்தல்','அதிகாரப் பகிர்வு'],r:[
+['வழங்கப்படும் அதிகாரம்','நிர்வாக அதிகாரம் மட்டுமே','சட்டவாக்கம், நிறைவேற்று, நீதி ஆகிய முத்துறை அதிகாரங்களும்'],
+['வழங்கும் முறை','பாராளுமன்றச் சாதாரண சட்டம்/மசோதா','அரசியலமைப்பின் மூலம் மட்டுமே'],
+['மீளப் பெறல்','மத்திய அரசு சட்டத்தின் மூலம் மீளப் பெறலாம்','தன்னிச்சையாக மீளப் பெற முடியாது; அரசியலமைப்புத் திருத்தம் அவசியம்'],
+['பிராந்திய அலகின் நிலை','சுயாதீன அரசாகக் கருதப்படாது','மாநிலம் அல்லது சுயாதீன ஆட்சி அலகாகத் தொழிற்படும்'],
+['உதாரணம்','இலங்கையின் உள்ளூராட்சி மன்றங்கள், மாகாண நிர்வாகக் கட்டமைப்பு','அமெரிக்கா, சுவிட்சர்லாந்து; இலங்கையின் மாகாண சபைகள்']]},
+{t:'3. ஒற்றையாட்சி அரசும் கூட்டாட்சி (சமஷ்டி) அரசும்',cls:'md',sep:{1:'VS'},it:[
+['🏛️','ஒற்றையாட்சி: வரைவிலக்கணம்',['ஹெர்மன் ஜே. ஃபைனர்: அரசியல் அதிகாரம் எல்லா வகையிலும் ஒரு மத்திய நிறுவனத்தினுள் குவிந்திருப்பது','ஏ. வி. டைசி: ஒரு மத்திய அதிகாரப்பீடம் மட்டுமே சட்டமியற்றும் உயர் அதிகாரம் கொண்டிருப்பதும், இறையாண்மையுள்ள வேறு நிறுவனங்கள் அரசியலமைப்பில் இல்லாததும்','உதாரணம்: இலங்கை, ஐக்கிய இராச்சியம், பிரான்ஸ்']],
+['📌','ஒற்றையாட்சி: பண்புகள்',['முத்துறை அதிகாரங்களும் மத்திய அரசிடம் குவிந்திருக்கும்','நிர்வாக வசதிக்குச் சில அதிகாரங்கள் பரவலாக்கப்பட்டாலும் மத்திய அரசு மீளப் பெறலாம்']],
+['🗺️','சமஷ்டி: வரைவிலக்கணம்',['ஏ. வி. டைசி: வேற்றுமையில் ஒற்றுமையைக் காண வழியமைக்கும் ஆட்சி முறை','கே. சி. வியர்: தத்தமது எல்லைக்குள் சுயாதீனமாகச் செயற்பட்டு, சில விடயங்களில் ஒற்றுமையாகச் செயற்படும் நிலை','உதாரணம்: அமெரிக்கா, சுவிட்சர்லாந்து, இந்தியா, ஆஸ்திரேலியா','பிராந்திய அலகு: மாநிலம் (சுவிட்சர்லாந்தில் கண்டன்)']],
+['📌','சமஷ்டி: பண்புகள்',['எழுதப்பட்ட அரசியலமைப்பு','மத்திய, மாநில அதிகாரங்கள் அரசியலமைப்பில் பகிரப்பட்டிருத்தல்','விளக்கமளிக்கும், முரண்பாடு தீர்க்கும் அதிகாரம் உயர் நீதிமன்றத்திடம்','சட்டவாக்கத்துறையில் மேலவை (எ.கா: அமெரிக்க செனட்)']]]},
+{t:'ஒப்பீடு 2: ஒற்றையாட்சி × சமஷ்டி',tb:1,h:['பண்பு','ஒற்றையாட்சி அரசு','கூட்டாட்சி / சமஷ்டி அரசு'],r:[
+['அதிகார மையம்','ஒரு மத்திய அதிகார மையம் மட்டும்','மத்திய அரசு, மாநில அரசுகள் என இரு மையங்கள்'],
+['அரசியலமைப்பு','எழுதப்பட்ட அல்லது எழுதப்படாதது','கட்டாயமாக எழுதப்பட்டது'],
+['சட்டங்கள்','நாடு முழுவதற்கும் ஒரே மத்திய அரசுச் சட்டம் முதன்மையானது','மத்திய, மாநிலச் சட்டங்கள் என இருவகை'],
+['நீதிமன்றத்தின் பங்கு','சட்டங்களை நடைமுறைப்படுத்தி நீதி வழங்கும்','அரசியலமைப்புக்கு விளக்கமளித்து மத்திய–மாநில முரண்பாடுகளைத் தீர்க்கும்'],
+['சட்டவாக்க மன்றம்','ஒரு சபை அல்லது இரு சபைகள்','கட்டாயமாக மேலவை உண்டு (எ.கா: செனட்)'],
+['உதாரணம்','இலங்கை, பிரித்தானியா, பிரான்ஸ்','அமெரிக்கா, சுவிட்சர்லாந்து, இந்தியா, ஆஸ்திரேலியா']]},
+{t:'4. நவீன அரசுகள் அதிகாரப் பங்கீடு செய்வதற்கான காரணங்கள்',cls:'big',it:[
+['🌈','வேற்றுமையில் ஒற்றுமை',['பல்வேறு மொழி, சமயம், இனங்களைச் சேர்ந்த மக்களின் தனித்துவத்துக்கு மதிப்பளித்து, அனைவரையும் தேசிய குறிக்கோளின் கீழ் இணைத்து ஆட்சி செய்தல்']],
+['🌏','பாரிய நிலப்பரப்பு',['நிலப்பரப்பு மிகப் பெரிதாக இருக்கும்போது ஒரே மத்திய இடத்திலிருந்து நிர்வகிப்பதிலுள்ள சிரமங்களைத் தவிர்த்தல்']],
+['🛡️','தேசிய பாதுகாப்பு',['தேசிய பாதுகாப்பை உறுதிப்படுத்துதல்']]]},
+{t:'5. இலங்கையில் அதிகாரப் பன்முகப்படுத்தல் வரலாறு (காலக்கோடு)',cls:'sm',arrow:1,it:[
+['👑','அநுராதபுரம்',['பண்டுகாபய மன்னன் கிராம நிர்வாகத்துக்காக “கம்பார”, “காமினி” போன்ற அதிகாரிகளை நியமித்தான்']],
+['🏰','பொலன்னறுவை',['மகா பராக்கிரமபாகு மன்னன் பிராந்திய ஆட்சியாளர்களை நியமித்து நிர்வாக அதிகாரங்களை வழங்கினான்']],
+['🇬🇧','1815',['பிரித்தானியர்: மாகாண மட்டத்தில் “ரெசிடென்ட்” அதிகாரி நியமிக்கப்பட்டார்']],
+['🏙️','1865–66',['1865 மாநகரசபைக் கட்டளைச் சட்டம்','1865 கொழும்பு, 1866 கண்டி மாநகர சபைகள் உருவாக்கப்பட்டன']],
+['🏘️','1871 · 1924',['1871: கிராம சபை முறை மீண்டும் அமுல்','1924: கிராம சபைக் கட்டளைச் சட்டம் உருவாக்கப்பட்டது']],
+['💡','1926',['எஸ். டபிள்யு. ஆர். டி. பண்டாரநாயக்க மலைநாட்டுக்குச் சமஷ்டி ஆட்சி முறையின் தேவை பற்றிக் கருத்து வெளியிட்டார்']],
+['📜','1931',['டொனமூர் யாப்பின் கீழ் கிராம சபைகளின் அதிகாரம் அதிகரிக்கப்பட்டது']],
+['🏢','1940 · 1943',['1940: நகர சபைகள்','1943: உள்ளூராட்சி மன்றக் கட்டளைச் சட்டம் அங்கீகரிக்கப்பட்டது']],
+['🤝','1957',['பண்டாரநாயக்க – செல்வநாயகம் ஒப்பந்தம் (பண்டா–செல்வா). நடைமுறைப்படுத்தப்படவில்லை']],
+['🤝','1965',['டட்லி சேனநாயக்க – செல்வநாயகம் ஒப்பந்தம் (டட்லி–செல்வா). நடைமுறைப்படுத்தப்படவில்லை']],
+['⚙️','1970–1980',['நிர்வாகப் பன்முகப்படுத்தலில் அரசுகள் கவனம் செலுத்தின']],
+['🏛️','1987',['1978 அரசியலமைப்பின் 13ஆம் திருத்தம்: 9 மாகாணங்களுக்கும் மாகாண சபைகள் உருவாக்கப்பட்டன']]]},
+{t:'6. இலங்கையில் மாகாண சபைக் கட்டமைப்பு',cls:'md',it:[
+['🏛️','மாகாண சபை',['1978 அரசியலமைப்பின் 154A (1), (2) உறுப்புரைகளின்படி அமைந்தது','பதவிக்காலம்: 5 ஆண்டுகள்','உறுப்பினர்கள் சர்வஜன வாக்குரிமையால் நேரடியாகத் தெரிவு']],
+['🎩','ஆளுநர்',['154B சரத்தின்படி ஜனாதிபதியால் 5 ஆண்டுகளுக்கு நியமனம்','மத்திய அரசுக்கும் மாகாண சபைக்கும் இடையிலான இணைப்புப் பாலம்; பெயரளவு நிர்வாகி']],
+['🔔','ஆளுநரின் அதிகாரங்கள்',['மாகாண சபையைக் கூட்டுதல்','அமர்வுகளை முடிவுக்குக் கொண்டுவருதல், கலைத்தல்','மாகாண மசோதாக்களுக்கு ஒப்புதலளித்தல்']],
+['🧑‍💼','முதலமைச்சரும் அமைச்சரவையும்',['பெரும்பான்மை ஆதரவுள்ள உறுப்பினர் ஆளுநரால் முதலமைச்சராக நியமிக்கப்படுவார்','முதலமைச்சருடன் 4 பேருக்கு மிகைபடாத அமைச்சரவை, மாகாண சபை உறுப்பினர்களிலிருந்து']]]},
+{t:'அட்டவணை 3: 13வது திருத்தத்தின் 3 அதிகார நிரல்கள்',tb:1,h:['அதிகார நிரல்','அதிகாரங்கள்','உள்ளடங்கும் பிரதான விடயங்கள்'],r:[
+['நிரல் I: மாகாண சபை நிரல்','37','மாகாணப் பொருளாதாரத் திட்டமிடல், உள்ளூராட்சி மன்றங்கள், மாகாண வீடமைப்பு, சமூக சேவைகள் & புனர்வாழ்வு, மாகாண விவசாயம், சிறிய நீர்ப்பாசனத் திட்டங்கள்'],
+['நிரல் II: ஒதுக்கப்பட்ட நிரல் (மத்திய அரசு)','17','தேசிய கொள்கை (பாதுகாப்பு, தேசிய ஒருமைப்பாடு, உள்நாட்டுப் பாதுகாப்பு), வெளிவிவகாரம் & சர்வதேச ஒப்பந்தங்கள், தேசிய நாணயக் கொள்கை & நிதி, குடியகல்வு/குடியேற்றம், குடித்தொகை விபரங்கள்'],
+['நிரல் III: இணைந்த நிரல்','36','மத்திய அரசும் மாகாண சபையும் இணைந்து செயற்படுவன: திட்டமிடல், தேசிய வீடமைப்பு & நிர்மாணம், சமூக சேவைகள் & நிவாரணம், விவசாயம் & கமநல சேவைகள்']]},
+{t:'7. இலங்கையின் உள்ளூராட்சி மன்றங்கள்',tb:1,h:['உள்ளூராட்சி மன்றம்','பிரதானி (தலைவர்)','துணைப் பிரதானி'],r:[
+['🏙️ மாநகர சபை (Municipal Council)','மாநகர பிதா (Mayor)','உப மாநகர பிதா (Deputy Mayor)'],
+['🏘️ நகர சபை (Urban Council)','தலைவர் (Chairman)','உப தலைவர் (Vice Chairman)'],
+['🌾 பிரதேச சபை (Pradeshiya Sabha)','தலைவர் (Chairman)','உப தலைவர் (Vice Chairman)']]},
+{t:'8. உலக சமஷ்டி மாதிரிகள்: அமெரிக்கா & சுவிட்சர்லாந்து',cls:'md',it:[
+['🇺🇸','அமெரிக்கா: தோற்றம்',['1787 அரசியலமைப்பினால் உருவானது','ஆரம்பத்தில் 13 குடியேற்ற அரசுகள்; பின்னர் 50 மாநிலங்கள்']],
+['⚖️','அமெரிக்கா: அதிகாரப் பங்கீடு',['மத்திய அதிகாரங்கள் அரசியலமைப்பில் குறிப்பிடப்பட்டு, எஞ்சிய அதிகாரங்கள் (Residual Powers) மாநிலங்களுக்கு','மத்திய: வரி, நிதி நடவடிக்கை, தேசிய பாதுகாப்பு, தேசியப் பொருளாதார அபிவிருத்தி','மாநிலம்: கல்வி, சுகாதாரம், வீடமைப்பு, உள்ளூர்ப் பெருந்தெருக்கள்']],
+['🏛️','அமெரிக்கா: கட்டமைப்பு',['காங்கிரஸ்: பிரதிநிதிகள் சபை + செனட் (மாநிலத்துக்கு 2 வீதம் 100 பேர்)','நிறைவேற்றுத்துறை: ஜனாதிபதி','நீதித்துறை: சமஷ்டி உயர் நீதிமன்றம்','யாப்புத் திருத்தம்: காங்கிரஸின் 2/3 பெரும்பான்மை + 3/4 மாநிலங்களின் ஒப்புதல்']],
+['🇨🇭','சுவிட்சர்லாந்து: தோற்றம்',['1848 அரசியலமைப்புச் சீர்திருத்தத்தால் அமைந்தது','பிராந்திய அலகுகள் “கண்டன்” (Canton); தற்போது 26']],
+['🏛️','சுவிட்சர்லாந்து: கட்டமைப்பு',['சட்டவாக்கம்: சமஷ்டிப் பேரவை (தேசிய சபை + அரச சபை)','நிறைவேற்று: 7 பேர் கொண்ட சமஷ்டி சபை (Federal Council); சமஷ்டிப் பேரவை நியமிக்கும்','தலைவர் ஏனையோரைவிட மேன்மையானவர் அல்லர் (கூட்டு நிறைவேற்று அதிகாரம்)']]]},
+{t:'ஒப்பீடு 5: அமெரிக்கா × சுவிட்சர்லாந்து',tb:1,h:['அம்சம்','ஐக்கிய அமெரிக்கா','சுவிட்சர்லாந்து'],r:[
+['மாநிலங்கள்','50 மாநிலங்கள் (States)','26 கண்டன்கள் (Cantons)'],
+['நிறைவேற்றுத்துறை','ஒற்றை நபர் நிறைவேற்று அதிகாரம் (ஜனாதிபதி)','7 பேர் கொண்ட கூட்டு நிறைவேற்றுச் சபை'],
+['சட்டவாக்கத்துறை','காங்கிரஸ் (பிரதிநிதிகள் சபை + செனட்)','சமஷ்டிப் பேரவை (தேசிய சபை + அரச சபை)'],
+['மேலவை பிரதிநிதித்துவம்','செனட்டுக்கு மாநிலத்துக்கு 2 வீதம், 100 பேர்','அரச சபைக்குக் கண்டன்களிலிருந்து பிரதிநிதிகள்']]}
+];
+var n=0,seen={};
+var $=function(i){return document.getElementById(i)};
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function show(i){
+  n=Math.max(0,Math.min(S.length-1,i));var s=S[n],h='',d=0,tot;
+  $('t').textContent=s.t;
+  if(s.tb){
+    tot=s.r.length;
+    h='<table><thead><tr>'+s.h.map(function(x){return '<th>'+esc(x)+'</th>'}).join('')+'</tr></thead><tbody>'+
+    s.r.map(function(r,i2){return '<tr data-r="'+i2+'" class="'+(seen[n+'-'+i2]?'seen':'')+'" style="--d:'+(0.15*i2+.2).toFixed(2)+'s">'+r.map(function(c){return '<td>'+esc(c)+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table>';
+  }else{
+    tot=s.it.length;
+    s.it.forEach(function(it,k){
+      h+='<button class="tile '+(it[4]||s.cls||'')+(seen[n+'-'+k]?' seen':'')+'" style="--c:'+COL[k%6]+';--d:'+(d+=.1).toFixed(2)+'s" data-k="'+k+'"><span class="ic">'+it[0]+'</span>'+it[1]+(it[3]?'<small>'+it[3]+'</small>':'')+'</button>';
+      if(k<tot-1&&((s.sep&&s.sep[k])||s.arrow))h+='<span class="sep" style="--d:'+(d+=.1).toFixed(2)+'s">'+(s.arrow?'→':s.sep[k])+'</span>';
+      if(s.br&&s.br.indexOf(k)>-1)h+='<span class="br"></span>';
+    });
+  }
+  $('g').innerHTML=h;
+  var c=0;for(var j=0;j<tot;j++)if(seen[n+'-'+j])c++;
+  $('hint').textContent='👆 '+(s.tb?'ஒரு வரிசையைத் தொடுங்கள்':'ஒவ்வொன்றையும் தொடுங்கள்')+' ('+c+'/'+tot+')';
+  var dots='';for(var q=0;q<S.length;q++)dots+='<i data-n="'+q+'"'+(q==n?' class="on"':'')+'></i>';
+  $('dots').innerHTML=dots;
+  $('pv').disabled=n==0;$('nx').disabled=n==S.length-1;
+}
+function open_(k,ic,name,lines,html){
+  seen[n+'-'+k]=1;
+  $('card').style.setProperty('--c',COL[k%6]);
+  $('ci').textContent=ic;$('ch').textContent=name;
+  $('cl').innerHTML=lines.map(function(l,j){return '<li style="animation-delay:'+(j*.12)+'s">'+(html?l:esc(l))+'</li>'}).join('');
+  var len=lines.join('').length;
+  $('card').className=len>520?'xs':len>300?'sm':'';
+  $('pop').classList.add('show');
+}
+function close_(){$('pop').classList.remove('show');show(n)}
+$('g').addEventListener('click',function(e){
+  var b=e.target.closest('.tile'),r=e.target.closest('tr[data-r]'),s=S[n];
+  if(b){var k=+b.dataset.k,it=s.it[k];open_(k,it[0],it[1],it[2],it[5])}
+  else if(r){var i=+r.dataset.r,row=s.r[i];
+    open_(i,'🔍',row[0],row.slice(1).map(function(c,j){return '<b>'+esc(s.h[j+1])+'</b>: '+esc(c)}),1)}
+});
+$('pop').addEventListener('click',function(e){if(e.target.id=='pop'||e.target.id=='x')close_()});
+$('pv').onclick=function(){show(n-1)};$('nx').onclick=function(){show(n+1)};
+$('dots').addEventListener('click',function(e){if(e.target.dataset.n)show(+e.target.dataset.n)});
+document.addEventListener('keydown',function(e){
+  if(e.key=='Escape')close_();
+  else if(!$('pop').classList.contains('show')){if(e.key=='ArrowRight')show(n+1);if(e.key=='ArrowLeft')show(n-1)}
+});
+var x0=null;
+document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',function(e){
+  if(x0===null||$('pop').classList.contains('show'))return;
+  var dx=e.changedTouches[0].clientX-x0;x0=null;
+  if(Math.abs(dx)>70)show(n+(dx<0?1:-1));
+},{passive:true});
+function fit(){
+  var w=innerWidth,h=innerHeight,por=w/h<1,W=por?1080:1920,H=por?1920:1080,k=Math.min(w/W,h/H),cv=$('cv');
+  cv.style.width=W+'px';cv.style.height=H+'px';
+  cv.style.transform='translate('+(-W*k/2)+'px,'+(-H*k/2)+'px) scale('+k+')';
+}
+addEventListener('resize',fit);fit();
+show(0);
+</script>
+</body>
+</html>
